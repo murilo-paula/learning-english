@@ -77,8 +77,8 @@ const Gamepage = () => {
   };
 
   return (
-    <div className="flex flex-col w-full h-full md:justify-center md:items-center">
-      <h1 className="flex justify-center items-center rounded-t font-bold h-10 md:w-200 bg-blue-300">
+    <div className="flex flex-col w-full h-full md:justify-center md:items-center bg-gray-300">
+      <h1 className="flex justify-center items-center md:rounded-t font-bold h-10 md:w-200 bg-blue-300">
         Talking with Liam
       </h1>
       <div className="w-full h-full md:w-200 md:h-120 pt-3 pb-3 rounded-b bg-blue-100 overflow-y-auto">
@@ -98,7 +98,7 @@ const Gamepage = () => {
                     src={user.avatar}
                   />
                 ) : (
-                  <img className="min-w-full h-full rounded-full bg-red-500 " src={Liam} />
+                  <img className="min-w-full h-full rounded-full " src={Liam} />
                 )}
               </div>
             </span>

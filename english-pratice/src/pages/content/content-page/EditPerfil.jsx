@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import userImg from "../../../assets/img/user.png";
 import { useUserStore } from "../../../store/useStore.js"
 
 const EditPerfil = () => { 
@@ -7,30 +6,29 @@ const EditPerfil = () => {
   const [newName, setNewName] = useState("")
   const [newEmail, setNewEmail] = useState("")
   const [newId, setNewId] = useState("")
-  const [newAvatar, setNewAvatar] = useState("")
 
   const { user, updateUser } = useUserStore();
 
-  const changeImg = () => {
-    updateUser({ avatar: newAvatar });
-  };
-
   const handleSave = () => {
-    newName.trim() === "" ? newName :  updateUser({ name: newName }),
-    newEmail.trim() === "" ? newEmail :  updateUser({ email: newEmail }),
-    newId.trim() === "" ? newId :  updateUser({ id: newId })
+    if (newName.trim() !== "") updateUser({ name: newName });
+    if (newEmail.trim() !== "") updateUser({ email: newEmail });
+    if (newId.trim() !== "") updateUser({ id: newId });
    ;
   };
   
   return (
-    <form className="grid grid-cols-3 w-screen h-screen">
+    <form className="grid md:grid-cols-3 w-screen h-screen">
       <div className="w-full col-span-1 flex justify-center bg-amber-50 border-r">
         <div>
-          <div className="w-40 h-40 border rounded-full m-5 mt-10">
-            <img className="rounded-full" src={user.avatar} alt="" />
+          <div className="w-40 h-40 rounded-full overflow-hidden m-5 mt-10">
+            <img className="w-full h-full object-cover" src={user.avatar} alt="" />
           </div>
-          <div>
-            <input className="w-25 h-15 bg-emerald-500" type="file" name=""tURL id="" accept="image/*" onChange={(e) => setNewAvatar(URL.createObjec(e.target.files[0]))}/>
+
+          <div className="flex justify-center">
+            <label className="w-24 h-14 bg-emerald-500 rounded flex items-center justify-center text-white text-sm cursor-pointer" htmlFor="avatarinput">Choose photo</label>
+
+          
+            <input className="hidden" type="file" name="" id="avatarinput" accept="image/*" onChange={(e) => updateUser( {avatar: URL.createObjectURL(e.target.files[0])})}/>
           </div>
 
           <div className="max-w-50">
@@ -41,7 +39,7 @@ const EditPerfil = () => {
         </div>
       </div>
 
-      <div className="w-full gap-4 col-span-2 bg-blue-100 p-5 flex flex-col justify-between">
+      <div className="w-full gap-4 md:col-span-2 bg-blue-100 p-5 flex flex-col justify-between">
         <div className="grid grid-cols-1 gap-5">
           <h1 className="text-3xl font-bold">Accont Settings</h1>
           <div>
@@ -61,7 +59,7 @@ const EditPerfil = () => {
 
       <div>
         <p>Save changes to update your profile.</p>
-        <button className="w-25 h-10 bg-emerald-500 rounded" type="button" onClick={handleSave, {changeImg}}>Save Profile</button>
+        <button className="w-25 h-10 bg-emerald-500 rounded" type="button" onClick={handleSave}>Save Profile</button>
       </div>
       </div>
     </form>

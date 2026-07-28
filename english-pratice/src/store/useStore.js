@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import userImg from '../assets/img/reading.jpg';
+import userImg from '../../src/assets/img/user.png'
 
 export const useUserStore = create((set) => ({
 

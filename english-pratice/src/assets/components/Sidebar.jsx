@@ -13,11 +13,11 @@ const Sidebar = () => {
     <div className="fixed left-0 top-0 z-50 flex">
       <aside
         className={`h-screen overflow-hidden bg-blue-900 transition-all duration-300 ease-in-out md:static ${
-          sideOpen ? "w-[100vw] md:w-64" : "w-0"
+          sideOpen ? "w-screen md:w-64" : "w-0"
         }`}
       >
         <div
-          className={`flex h-full w-[100vw] flex-col transition-opacity duration-300 md:w-64 ${sideOpen ? "opacity-100" : "opacity-0"}`}
+          className={`flex h-full w-screen flex-col transition-opacity duration-300 md:w-64 ${sideOpen ? "opacity-100" : "opacity-0"}`}
         >
           <div className="flex justify-between">
             <h2 className="mb-3 mt-3 items-center pl-4 text-center text-2xl text-emerald-500">
