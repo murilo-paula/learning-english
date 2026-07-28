@@ -1,27 +1,18 @@
-import OpenAI from 'openai';
-import React, { useState } from 'react';
-
+import OpenAI from "openai";
+import React, { useState } from "react";
+import { useUserStore } from "../../../store/useStore";
+import { myprompt } from "../../../../prompt";
+import Liam from "../../../assets/img/Liam.jpg"
 
 const Gamepage = () => {
-
   const groqClient = new OpenAI({
     apiKey: import.meta.env.VITE_GROQ_API_KEY,
     baseURL: "https://api.groq.com/openai/v1",
-    dangerouslyAllowBrowser: true
+    dangerouslyAllowBrowser: true,
   });
 
-
-  const [systemPrompt, setSystemPrompt] = useState(`
-  Você é o "Liam", um professor de inglês nativo, paciente, amigável e focado em ensinar através da conversação prática. 
-  Sua missão é ajudar o usuário a praticar inglês de forma natural, simulando situações do dia a dia.
-
-  Siga rigorosamente as seguintes regras de comportamento:
-  1. IDIOMA DAS RESPOSTAS: Responda SEMPRE em INGLÊS. No entanto, se o usuário cometer um erro grave ou demonstrar muita dificuldade, adicione uma breve explicação ou tradução em PORTUGUÊS entre parênteses () no final da mensagem.
-  2. ADAPTAÇÃO DE NÍVEL: Identifique o nível do usuário pelas mensagens dele. Use vocabulário simples e frases curtas para iniciantes, e avance o vocabulário se notar que ele é avançado.
-  3. CORREÇÃO GENTIL: Nunca interrompa o fluxo da conversa apenas para corrigir. Se o usuário errar a gramática, responda normalmente em inglês continuando o assunto, mas no final da sua mensagem coloque a correção de forma gentil: "💡 Dica: Em vez de '${'{user_error}'}', o mais natural seria '${'{correct_way}'}'."
-  4. TAMANHO DAS MENSAGENS: Mantenha suas respostas curtas (máximo 3 frases). Faça sempre UMA pergunta no final para passar a vez de falar para o usuário.
-  5. DINÂMICA INICIAL: Se o usuário apenas disser "Oi" ou começar o chat, sugira um tópico simples para conversar (ex: hobbies, comida favorita, rotina, viagem) ou pergunte como foi o dia dele.
-  `);
+  const { user, updateUser } = useUserStore();
+  const [systemPrompt, setSystemPrompt] = useState(myprompt);
 
   const [sendText, setSendText] = useState("First text");
 
@@ -38,64 +29,101 @@ const Gamepage = () => {
     window.speechSynthesis.speak(utterance);
   };
 
-  const [messages, setMessages] = useState([
-    { role: 'assistant', content: 'Hi, I am Liam'}
-  ]);
-  const [input, setInput] = useState('');
+  const [messages, setMessages] = useState(user.story);
+  const [input, setInput] = useState("");
   const [loading, setloading] = useState(false);
 
   const sendMessage = async (e) => {
     e.preventDefault();
     if (!input.trim() || loading) return;
-    
-    const userMessage = { role: 'user', content: input};
+
+    const userMessage = { role: "user", content: input };
     const updatedMessages = [...messages, userMessage];
 
     setMessages(updatedMessages);
-    setInput('');
+    setInput("");
     setloading(true);
-
 
     try {
       const response = await groqClient.chat.completions.create({
-        model: 'llama-3.3-70b-versatile',
-        
-        messages: [{role: 'system', content: systemPrompt} ,...updatedMessages.map(msg => ({ role: msg.role, content: msg.content}))],
+        model: "llama-3.3-70b-versatile",
+
+        messages: [
+          { role: "system", content: systemPrompt },
+          ...updatedMessages.map((msg) => ({
+            role: msg.role,
+            content: msg.content,
+          })),
+        ],
       });
 
       const botmessage = {
-        role: 'assistant',
-        content: response.choices[0].message.content
-      }
+        role: "assistant",
+        content: response.choices[0].message.content,
+      };
 
       setMessages([...updatedMessages, botmessage]);
-      handleClick(botmessage.content)
+      handleClick(botmessage.content);
+      updateUser({ story: [...updatedMessages, botmessage] });
     } catch (error) {
-      console.error('Happended an error', error);
-      setMessages([...updatedMessages, { role: 'assistant', content: 'Sorry, error when call groq API' }]);
+      console.error("Happended an error", error);
+      setMessages([
+        ...updatedMessages,
+        { role: "assistant", content: "Sorry, error when call groq API" },
+      ]);
     } finally {
       setloading(false);
     }
-    
-
-  }
+  };
 
   return (
-    <div className="w-full min-h-screen box-border p-5 md:p-10 max-w-6xl mx-auto">
-      <h1>Chatbot</h1>
-      <div className='w-100 h-100 bg-amber-300 overflow-auto'>
+    <div className="flex flex-col w-full h-full md:justify-center md:items-center">
+      <h1 className="flex justify-center items-center rounded-t font-bold h-10 md:w-200 bg-blue-300">
+        Talking with Liam
+      </h1>
+      <div className="w-full h-full md:w-200 md:h-120 pt-3 pb-3 rounded-b bg-blue-100 overflow-y-auto">
         {messages.map((msg, index) => (
-          <div key={index} className={`flex mb-3 ${msg.role === 'user' ? 'justify-end bg-blue-400' : 'justify-start bg-pink-500'}`}><span>{msg.content}</span></div>
+          <div
+            key={index}
+            className={`flex mt-3 ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+          >
+            <span
+              className={`flex items-center gap-2 p-3 md:min-w-100 md:max-w-150 ${msg.role === "user" ? " bg-blue-400 rounded-l justify-end" : " bg-emerald-500 rounded-r justify-start"}`}
+            >
+              <p className="order-2 break-all">{msg.content}</p>
+              <div className={`w-10 h-10 rounded-full shrink-0 overflow-hidden ${msg.role === "user" ? "order-3" : "order-1"}`}>
+                {msg.role === "user" ? (
+                  <img
+                    className="w-full h-full object-cover"
+                    src={user.avatar}
+                  />
+                ) : (
+                  <img className="min-w-full h-full rounded-full bg-red-500 " src={Liam} />
+                )}
+              </div>
+            </span>
+          </div>
         ))}
-        {loading && <div>groq to think</div>}
+        {loading && <div>...</div>}
       </div>
 
-      <form className='flex gap-10' onSubmit={sendMessage}>
-        <input type="text" value={input} onChange={(e) => setInput(e.target.value)} placeholder='Write your message here' />
-        <button type="submit">send</button>
+      <form className="flex md:w-200" onSubmit={sendMessage}>
+        <input
+          className="px-4 py-3 w-full md:w-150 border rounded"
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Write your message here"
+        />
+        <button
+          className="flex-1 hidden md:block rounded shadow-2xl bg-blue-500 hover:bg-blue-600"
+          type="submit"
+        >
+          send
+        </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Gamepage
+export default Gamepage;

@@ -9,6 +9,7 @@ export const useUserStore = create((set) => ({
     id: "213123321",
     number: "",
     avatar: userImg,
+    story: [{ role: 'assistant', content: 'Hi, I am Liam'}],
   },
 
   updateUser: (newData) =>

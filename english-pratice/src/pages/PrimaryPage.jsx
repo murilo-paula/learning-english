@@ -6,7 +6,7 @@ const PrimaryPage = () => {
   return (
     <div className="flex">
       <Sidebar />
-      <main>
+      <main className="w-screen h-screen">
         <Outlet />
       </main>
     </div>
