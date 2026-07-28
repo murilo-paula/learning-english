@@ -44,15 +44,15 @@ const EditPerfil = () => {
           <h1 className="text-3xl font-bold">Accont Settings</h1>
           <div>
             <h2>Your Name</h2>
-            <input className="border w-full size-8 rounded" maxLength="25" type="text" name="name" id="" placeholder={user.name} onChange={(e) => setNewName(e.target.value)}/>
+            <input className="border w-full h-8 rounded" maxLength="25" type="text" name="name" id="" placeholder={user.name} onChange={(e) => setNewName(e.target.value)}/>
           </div>
           <div>
             <h2>Email address</h2>
-            <input className="border w-full size-8 rounded" maxLength="25" type="text" name="email address" id="" placeholder={user.email} onChange={(e) => setNewEmail(e.target.value)}/>
+            <input className="border w-full h-8 rounded" maxLength="25" type="text" name="email_address" id="" placeholder={user.email} onChange={(e) => setNewEmail(e.target.value)}/>
           </div>
           <div>
             <h2>ID</h2>
-            <input className="border w-full size-8 rounded" maxLength="15" type="text"  inputMode="numeric" name="id" id="" placeholder={user.id} onChange={(e) => setNewId(e.target.value.replace(/\D/g, ""))}/>
+            <input className="border w-full h-8 rounded" maxLength="15" type="text"  inputMode="numeric" name="id" id="" placeholder={user.id} onChange={(e) => setNewId(e.target.value.replace(/\D/g, ""))}/>
           </div>
         </div>
 

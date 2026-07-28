@@ -81,7 +81,7 @@ const Sidebar = () => {
                 </div>
               </div> 
               <div className="flex h-full flex-col justify-center ml-2">
-                <h3>{user.name}</h3>
+                <h3 className="truncate">{user.name}</h3>
                 <h3 className="text-sm cursor-pointer transition-opacity duration-200 hover:opacity-70">
                   <Link to="editPerfil" onClick={() => setSideOpen(!sideOpen)}>
                     Edit perfil
