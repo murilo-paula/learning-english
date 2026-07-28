@@ -59,11 +59,11 @@ const Sidebar = () => {
                   </li>
                   <li className="ml-2 mr-2 rounded py-5 lg:mb-3 lg:mt-3 lg:py-1 lg:pl-7 text-gray-400 transition-colors duration-300 hover:bg-blue-700 cursor-pointer">
                     <Link
-                      to="improveVocabulary"
+                      to="Gamepage"
                       className="block"
                       onClick={() => setSideOpen(!sideOpen)}
                     >
-                      📚 Improve Vocabulary
+                      📚 Gamepage
                     </Link>
                   </li>
                 </ul>
