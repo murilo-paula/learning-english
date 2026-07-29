@@ -4,7 +4,7 @@ import App from "./App";
 import PrimaryPage from "./pages/PrimaryPage";
 import Introduction from "./pages/content/content-page/Introduction";
 import ImproveListening from "./pages/content/content-page/ImproveListening";
-import Gamepage from "./pages/content/content-page/Gamepage";
+import ChatBot from "./pages/content/content-page/ChatBot";
 import EditPerfil from "./pages/content/content-page/EditPerfil";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -14,13 +14,13 @@ const PageRoutes = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
 
-        <Route path="/primarypage" element={<PrimaryPage />}>
+        <Route path="primarypage" element={<PrimaryPage />}>
           <Route index path="Introduction" element={<Introduction />} />
           <Route path="ImproveListening" element={<ImproveListening />} />
-          <Route path="Gamepage" element={<Gamepage />} />
+          <Route path="ChatBot" element={<ChatBot />} />
           <Route path="editPerfil" element={<EditPerfil />} />
         </Route>
         <Route path="*" element={<h1>Error 404</h1>} />

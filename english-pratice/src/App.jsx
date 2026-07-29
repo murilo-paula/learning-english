@@ -14,7 +14,7 @@ function App() {
           <h2 className='font-bold text-3xl'>Learning English</h2>
           <p className='ml-4 max-w-1xl'>Learn English the right way. Here, you leave theory aside and focus on practice to unlock your speaking skills with confidence.</p>
           
-          <Link to='/primarypage/Introduction'>
+          <Link to='primarypage/Introduction'>
           <button className='px-3 py-1 ml-4 rounded-lg bg-emerald-500 w-fit hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 ease-in-out cursor-pointer'>Ready</button>
           </Link>
         </div> 

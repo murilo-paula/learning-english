@@ -7,14 +7,14 @@ function Header() {
       <h1 className="font-bold text-lg">Pratice English</h1>
       <nav>
         <ul className="flex gap-5">
-          <li>
+          <li className="hover:text-emerald-500">
             <a href="">About</a>
           </li>
-          <li>
-            <Link to="/login">Login</Link>
+          <li className="hover:text-emerald-500">
+            <Link to="login">Login</Link>
           </li>
-          <li>
-            <Link to="/register">Register</Link>
+          <li className="hover:text-emerald-500">
+            <Link to="register">Register</Link>
           </li>
         </ul>
       </nav>

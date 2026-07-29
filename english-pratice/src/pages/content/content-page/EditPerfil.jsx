@@ -20,16 +20,16 @@ const EditPerfil = () => {
   };
   
   return (
-    <form className="grid md:grid-cols-3 w-full h-full">
-      <div className="w-full col-span-1 flex justify-center bg-amber-50 border-r">
+    <form className="grid md:grid-cols-3 w-full md:h-full bg-blue-100">
+      <div className="w-full col-span-1 flex justify-center border-r-2 border-blue-200 md:bg-blue-300">
         <div className="md:w-72 flex md:flex-col items-center">
           <div>
             <div>
-              <div className="w-28 h-28 md:w-28 md:h-38 rounded-full overflow-hidden m-5 mt-10">
+              <div className="w-28 h-28 md:w-38 md:h-38 rounded-full overflow-hidden m-5 mt-10 border border-emerald-500 ">
                 <img className="w-full h-full object-cover" src={user.avatar} alt="" />
               </div>
               <div className="flex justify-center">
-                <label className="w-20 h-12 md:w-24 md:h-14 bg-emerald-500 rounded flex items-center justify-center text-white text-sm cursor-pointer" htmlFor="avatarinput">Choose photo</label>
+                <label className="w-20 h-10 md:w-24 md:h-12 hover:text-gray-300 bg-emerald-500 hover:bg-emerald-600 rounded flex items-center justify-center text-white text-sm cursor-pointer" htmlFor="avatarinput">Choose photo</label>
             
                 <input className="hidden" type="file" name="" id="avatarinput" accept="image/*" onChange={(e) => updateUser( {avatar: URL.createObjectURL(e.target.files[0])})}/>
               </div>
@@ -44,7 +44,7 @@ const EditPerfil = () => {
         </div>
       </div>
 
-      <div className="w-full gap-4 md:col-span-2 bg-blue-100 p-5 flex flex-col justify-between">
+      <div className="w-full gap-4 md:col-span-2 p-5 flex flex-col justify-between">
         <div className="grid grid-cols-1 gap-5">
           <h1 className="text-3xl font-bold">Accont Settings</h1>
           <div>
@@ -64,7 +64,7 @@ const EditPerfil = () => {
 
       <div>
         <p>Save changes to update your profile.</p>
-        <button className="w-25 h-10 bg-emerald-500 rounded" type="button" onClick={handleSave}>Save Profile</button>
+        <button className="w-25 h-10 bg-emerald-500 hover:bg-emerald-600 cursor-pointer rounded" type="button" onClick={handleSave}>Save Profile</button>
       </div>
       </div>
     </form>

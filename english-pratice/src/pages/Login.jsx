@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
@@ -12,7 +13,7 @@ const Login = () => {
         </h2>
         <p className="flex items-center justify-center gap-2">
           <span>or</span>
-          <span className="text-emerald-500 cursor-pointer">register</span>
+          <span className="text-emerald-500 cursor-pointer"><Link to="/register">Register</Link></span>
         </p>
         <form action="" className="grid grid-cols-1">
           <label className="flex justify-center mb-1">Email</label>

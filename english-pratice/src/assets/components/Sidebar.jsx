@@ -59,11 +59,11 @@ const Sidebar = () => {
                   </li>
                   <li className="ml-2 mr-2 rounded py-5 lg:mb-3 lg:mt-3 lg:py-1 lg:pl-7 text-gray-400 transition-colors duration-300 hover:bg-blue-700 cursor-pointer">
                     <Link
-                      to="Gamepage"
+                      to="ChatBot"
                       className="block"
                       onClick={() => setSideOpen(!sideOpen)}
                     >
-                      📚 Gamepage
+                      📚 Chat
                     </Link>
                   </li>
                 </ul>
@@ -71,8 +71,8 @@ const Sidebar = () => {
             </nav>
             <hr className="text-gray-400" />
             <div className="grid h-20 w-full grid-cols-2 lg:w-40">
-              <div className="flex w-full justify-end">
-                <div className="flex w-full max-w-20 rounded-full overflow-hidden border">
+              <div className="flex w-full justify-end items-center">
+                <div className="flex w-16 h-16 max-w-20 rounded-full overflow-hidden border">
                   <img
                     src={user.avatar}
                     alt="User"
@@ -101,7 +101,7 @@ const Sidebar = () => {
       >
         <button
           type="button"
-          className={`absolute h-8 w-8 rounded bg-emerald-500 text-white shadow-lg cursor-pointer`}
+          className={`absolute h-8 w-8 rounded bg-emerald-500 hover:bg-emerald-600 text-white hover:text-gray-300 shadow-lg cursor-pointer`}
           onClick={() => setSideOpen(!sideOpen)}
         >
           {sideOpen ? "X" : "☰"}

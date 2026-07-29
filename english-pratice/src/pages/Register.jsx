@@ -42,7 +42,7 @@ const Register = () => {
               id="terms"
               className="mt-1 h-4 w-4 rounded border-gray-300 bg-white"
             />
-            <label htmlFor="terms" className="text-sm text-gray-100">
+            <label htmlFor="" className="text-sm text-gray-100">
               <span>I have read and accept</span>{" "}
               <span className="text-emerald-500 cursor-pointer">
                 the terms of use, software license terms,
