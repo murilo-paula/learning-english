@@ -15,27 +15,32 @@ const Login = () => {
           <span>or</span>
           <span className="text-emerald-500 cursor-pointer"><Link to="/register">Register</Link></span>
         </p>
-        <form action="" className="grid grid-cols-1">
-          <label className="flex justify-center mb-1">Email</label>
+        <form action="login" method="POST" className="grid grid-cols-1">
+          <label htmlFor="email" className="flex justify-center mb-1">Email</label>
           <input
             type="email"
-            name="put your email"
-            id=""
+            name="email"
+            id="email"
             placeholder="your@gmail.com"
             className="h-7 bg-white rounded mb-3"
+            required
           />
-          <label className="flex justify-center mb-1">password</label>
+          <label htmlFor="password" className="flex justify-center mb-1">password</label>
           <input
             type="password"
-            name="put your password"
-            id=""
+            name="password"
+            id="password"
             className="h-7 bg-white rounded mb-3"
             placeholder="***************"
+            required
+            minLength={8}
           />
-          <p className="flex text-emerald-500 cursor-pointer justify-end pb-3">
-            Forgot your password?
-          </p>
-          <button className="h-8 bg-emerald-500 rounded text-black">
+          <Link to="/register">
+            <p className="flex text-emerald-500 hover:text-emerald-600 cursor-pointer justify-end pb-3">
+              Forgot your password?
+            </p>
+          </Link>
+          <button type="submit" className="h-8 bg-emerald-500 hover:bg-emerald-600 rounded text-white cursor-pointer">
             log in
           </button>
         </form>
