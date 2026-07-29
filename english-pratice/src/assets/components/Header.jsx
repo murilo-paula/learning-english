@@ -8,7 +8,7 @@ function Header() {
       <nav>
         <ul className="flex gap-5">
           <li className="hover:text-emerald-500">
-            <a href="">About</a>
+            <Link to="About">About</Link>
           </li>
           <li className="hover:text-emerald-500">
             <Link to="login">Login</Link>

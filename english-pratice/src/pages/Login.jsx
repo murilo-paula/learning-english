@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 const Login = () => {
   return (
     <div className="flex w-screen h-screen items-center justify-center bg-gray-300">
-      <div className="w-100 h-100 bg-blue-900 text-gray-400 rounded-2xl p-6">
+      <div className="w-100 bg-blue-900 text-gray-400 rounded-2xl p-6">
+        <p className="fixed"> <Link to="/">X</Link> </p>
         <h1 className="flex font-bold text-3xl text-white justify-center mb-3">
           Pratice English
         </h1>
@@ -15,7 +16,7 @@ const Login = () => {
           <span>or</span>
           <span className="text-emerald-500 cursor-pointer"><Link to="/register">Register</Link></span>
         </p>
-        <form action="login" method="POST" className="grid grid-cols-1">
+        <form className="grid grid-cols-1">
           <label htmlFor="email" className="flex justify-center mb-1">Email</label>
           <input
             type="email"
@@ -35,15 +36,17 @@ const Login = () => {
             required
             minLength={8}
           />
-          <Link to="/register">
             <p className="flex text-emerald-500 hover:text-emerald-600 cursor-pointer justify-end pb-3">
-              Forgot your password?
+              <Link to="/register">Forgot your password?</Link>
             </p>
-          </Link>
           <button type="submit" className="h-8 bg-emerald-500 hover:bg-emerald-600 rounded text-white cursor-pointer">
             log in
           </button>
         </form>
+
+        <div className="flex justify-center w-full mt-3">
+          <h1 className="font-bold text-red-500 text-2xl">Atualmente nao funciona</h1>
+        </div>
       </div>
     </div>
   );

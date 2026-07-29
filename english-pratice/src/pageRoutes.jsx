@@ -8,6 +8,7 @@ import ChatBot from "./pages/content/content-page/ChatBot";
 import EditPerfil from "./pages/content/content-page/EditPerfil";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import AboutProject from "./pages/AboutProject";
 
 const PageRoutes = () => {
   return (
@@ -16,6 +17,7 @@ const PageRoutes = () => {
         <Route path="/" element={<App />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
+        <Route path="About" element={<AboutProject />} />
 
         <Route path="primarypage" element={<PrimaryPage />}>
           <Route index path="Introduction" element={<Introduction />} />
