@@ -19,7 +19,6 @@ export default async function handler(req, res) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // Note: SEM prefixo VITE_ aqui — assim ela nunca vai pro bundle do front-end.
         "Authorization": `Bearer ${process.env.GROQ_API_KEY}`,
       },
       body: JSON.stringify({
