@@ -1,16 +1,9 @@
-import OpenAI from "openai";
 import React, { useState } from "react";
 import { useUserStore } from "../../../store/useStore";
 import { myprompt } from "../../../../prompt";
-import Liam from "../../../assets/img/Liam.jpg"
+import Liam from "../../../assets/img/Liam.jpg";
 
 const Gamepage = () => {
-  const groqClient = new OpenAI({
-    apiKey: import.meta.env.VITE_GROQ_API_KEY,
-    baseURL: "https://api.groq.com/openai/v1",
-    dangerouslyAllowBrowser: true,
-  });
-
   const { user, updateUser } = useUserStore();
   const [systemPrompt, setSystemPrompt] = useState(myprompt);
 
@@ -45,21 +38,26 @@ const Gamepage = () => {
     setloading(true);
 
     try {
-      const response = await groqClient.chat.completions.create({
-        model: "llama-3.3-70b-versatile",
-
-        messages: [
-          { role: "system", content: systemPrompt },
-          ...updatedMessages.map((msg) => ({
-            role: msg.role,
-            content: msg.content,
-          })),
-        ],
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: [
+            { role: "system", content: systemPrompt },
+            ...updatedMessages.map((msg) => ({
+              role: msg.role,
+              content: msg.content,
+            })),
+          ],
+        }),
       });
 
+      if (!response.ok) throw new Error("Falha ao chamar a API de chat");
+
+      const data = await response.json();
       const botmessage = {
         role: "assistant",
-        content: response.choices[0].message.content,
+        content: data.choices[0].message.content,
       };
 
       setMessages([...updatedMessages, botmessage]);
@@ -91,7 +89,9 @@ const Gamepage = () => {
               className={`flex items-center gap-2 p-3 md:min-w-100 md:max-w-150 ${msg.role === "user" ? " bg-blue-400 rounded-l justify-end" : " bg-emerald-500 rounded-r justify-start"}`}
             >
               <p className="order-2 break-all">{msg.content}</p>
-              <div className={`w-10 h-10 rounded-full shrink-0 overflow-hidden ${msg.role === "user" ? "order-3" : "order-1"}`}>
+              <div
+                className={`w-10 h-10 rounded-full shrink-0 overflow-hidden ${msg.role === "user" ? "order-3" : "order-1"}`}
+              >
                 {msg.role === "user" ? (
                   <img
                     className="w-full h-full object-cover"

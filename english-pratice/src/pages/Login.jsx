@@ -45,7 +45,7 @@ const Login = () => {
         </form>
 
         <div className="flex justify-center w-full mt-3">
-          <h1 className="font-bold text-red-500 text-2xl">Atualmente nao funciona</h1>
+          <h1 className="font-bold text-red-500 text-2xl">in development</h1>
         </div>
       </div>
     </div>
